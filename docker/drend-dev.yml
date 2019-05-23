@@ -8,6 +8,7 @@ services:
       target: dev
     volumes:
       - "../drend:/service:ro"
+      - "./persistency/drend-ms-drend/static:/static:rw"
     image: drend-ms-drend
     container_name: drend-ms-drend
     ports:
@@ -23,6 +24,6 @@ services:
       LIMIT_REQUEST_LINE: 4094
       RELOAD: "--reload"
       NO_SENDFILE: "--no-sendfile"
-      LOG_LEVEL: debug
+      LOG_LEVEL: info
       NAME: drend
       LANG: en_US.UTF-8
