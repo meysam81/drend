@@ -9,6 +9,9 @@ setup(
     install_requires=[
         "Django==2.2.1",
         "gunicorn==19.9.0",
+        'djangorestframework==3.9.4',
+        'Markdown==3.1.1',
+        'django-filter==2.1.0',
     ],
     license='MIT',
     keywords=[

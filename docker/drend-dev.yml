@@ -2,20 +2,26 @@ version: "3.7"
 
 services:
   drend:
-    hostname: drend
     build:
       context: ../drend
       target: dev
-    volumes:
-      - "../drend:/service:ro"
-      - "./persistency/drend-ms-drend/static:/static:rw"
     image: drend-ms-drend
     container_name: drend-ms-drend
+    hostname: drend
+    volumes:
+      - "../drend:/service/drend:ro"
+      - "../users:/service/users:ro"
+      - "./persistency/drend-ms-drend/static:/service/static:rw"
+      - "./persistency/drend-ms-drend/database/:/service/database:rw"
     ports:
-      - "127.0.0.1:6060:6000"
+      - "127.0.0.1:8080:8000"
     restart: unless-stopped
     environment:
-      ADDRESS: ":6000"
+
+# ==============================================================================
+#                                 GUNICORN
+# ==============================================================================
+      ADDRESS: ":8000"
       BACKLOG: 2048
       THREADS: 1
       MAX_REQUESTS: 0
@@ -26,4 +32,13 @@ services:
       NO_SENDFILE: "--no-sendfile"
       LOG_LEVEL: info
       NAME: drend
+
+# ==============================================================================
+#                                 SYSTEM WIDE
+# ==============================================================================
       LANG: en_US.UTF-8
+
+# ==============================================================================
+#                                 DOCKERFILE
+# ==============================================================================
+      PORT: 8000

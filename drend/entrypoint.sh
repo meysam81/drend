@@ -13,4 +13,4 @@ gunicorn -b ${ADDRESS} \
          ${DAEMON} \
          --log-level ${LOG_LEVEL} \
          -n ${NAME} \
-         drend.wsgi
+         drend.drend.wsgi
