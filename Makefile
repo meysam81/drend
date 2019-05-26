@@ -3,10 +3,16 @@ build-dev:
 	docker-compose -f docker/drend-dev.yml build
 
 run-dev:
-	docker-compose -f docker/drend-dev.yml up
+	docker-compose -f docker/drend-dev.yml \
+					-f docker/gateway.yml \
+					-f analytic.yml \
+					up
 
 stop-dev:
-	docker-compose -f docker/drend-dev.yml down
+	docker-compose -f docker/drend-dev.yml \
+					-f docker/gateway.yml \
+					-f analytic.yml \
+					down
 
 base:
 	docker build -t drend-ms-base docker/base
