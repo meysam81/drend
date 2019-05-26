@@ -2,19 +2,19 @@ version: "3.7"
 
 services:
   drend:
-    hostname: drend
     build:
       context: ../drend
       target: dev
+    image: drend-ms-drend
+    container_name: drend-ms-drend
+    hostname: drend
     volumes:
       - "../drend:/service/drend:ro"
       - "../users:/service/users:ro"
       - "./persistency/drend-ms-drend/static:/service/static:rw"
       - "./persistency/drend-ms-drend/database/:/service/database:rw"
-    image: drend-ms-drend
-    container_name: drend-ms-drend
     ports:
-      - "127.0.0.1:80:8000"
+      - "127.0.0.1:8080:8000"
     restart: unless-stopped
     environment:
 
