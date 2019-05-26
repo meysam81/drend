@@ -40,7 +40,7 @@ services:
     container_name: drend-ms-gateway-postgres
     hostname: drend
     volumes:
-      - "./persistency/drend-ms-gateway-postgres/data:/var/lib/postgres/data"
+      - "./persistency/drend-ms-gateway-postgres/data:/var/lib/postgres/data:rw"
     ports:
       - "127.0.0.1:5432:5432"
     restart: unless-stopped
@@ -49,11 +49,11 @@ services:
       POSTGRES_PASSWORD: changeMeLater
       POSTGRES_DB: kong
 
-  kong-migrate:
+  kong-migrate-bootstrap:
     image: kong:1.2.0rc1-alpine
-    container_name: drend-ms-gateway-kong-migrate
+    container_name: drend-ms-gateway-kong-migrate-bootstrap
     hostname: drend
-    restart: unless-stopped
+#    restart: unless-stopped
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: postgres
@@ -63,6 +63,21 @@ services:
     command: kong migrations bootstrap
     depends_on:
       - postgres
+
+  kong-migrate:
+    image: kong:1.2.0rc1-alpine
+    container_name: drend-ms-gateway-kong-migrate
+    hostname: drend
+#    restart: unless-stopped
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: postgres
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: changeMeLater
+      KONG_PG_DATABASE: kong
+    command: kong migrations up
+    depends_on:
+      - kong-migrate-bootstrap
 
   konga:
     image: pantsel/konga:0.14.1
@@ -79,7 +94,7 @@ services:
       DB_PORT: 5432
       DB_USER: kong
       DB_PASSWORD: changeMeLater
-      DB_DATABASE: konga
+      DB_DATABASE: kong
       KONGA_LOG_LEVEL: error
       TOKEN_SECRET: changeMeLater
     depends_on:

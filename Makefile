@@ -5,13 +5,13 @@ build-dev:
 run-dev:
 	docker-compose -f docker/drend-dev.yml \
 					-f docker/gateway.yml \
-					-f analytic.yml \
+					-f docker/analytic.yml \
 					up
 
 stop-dev:
 	docker-compose -f docker/drend-dev.yml \
 					-f docker/gateway.yml \
-					-f analytic.yml \
+					-f docker/analytic.yml \
 					down
 
 base:
@@ -30,4 +30,13 @@ make-migrations:
 
 migrate: make-migrations
 	docker exec drend-ms-drend python manage.py migrate
+
+not-up:
+	docker ps -a | grep -v Up | grep drend-ms
+
+ps:
+	docker ps | grep drend-ms
+
+purge-containers:
+	docker ps -a | grep drend-ms | xargs docker stop | xargs docker rm
 
