@@ -21,7 +21,7 @@ ENV ENV development
 
 EXPOSE ${PORT}
 
-CMD 'entrypoint.sh'  # copied from the base image
+CMD sh entrypoint.sh
 
 
 
@@ -38,4 +38,4 @@ ENV ENV production
 
 EXPOSE ${PORT}
 
-CMD 'entrypoint.sh'  # copied from the base image
+CMD sh entrypoint.sh
