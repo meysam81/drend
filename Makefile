@@ -38,5 +38,5 @@ ps:
 	docker ps | grep drend-ms
 
 purge-containers:
-	docker ps -a | grep drend-ms | xargs docker stop | xargs docker rm
+	docker ps -a | grep drend-ms | awk 'NR>1 {print $1}' | xargs docker stop | xargs docker rm
 
