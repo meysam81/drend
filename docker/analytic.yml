@@ -6,8 +6,7 @@ services:
     container_name: drend-ms-analytic-grafana
     hostname: drend
     volumes:
-      - "./persistency/drend-ms-analytic-grafana/data:/var/lib/grafana:rw"
-      - "./persistency/drend-ms-analytic-grafana/config/grafana.ini:/etc/grafana/grafana.ini:ro"
+      - "./config/grafana/grafana.ini:/etc/grafana/grafana.ini:ro"
     ports:
       - "127.0.0.1:3001:3000"
     restart: unless-stopped
@@ -21,8 +20,8 @@ services:
     image: prom/prometheus:v2.10.0
     container_name: drend-ms-analytic-prometheus
     hostname: drend
-#    volumes:
-#      - "./persistency/drend-ms-analytic-prometheus/config:/etc/prometheus:rw"
+    volumes:
+      - "./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro"
     ports:
       - "127.0.0.1:9090:9090"
     restart: unless-stopped
