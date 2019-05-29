@@ -7,7 +7,7 @@ services:
       target: dev
     image: drend-ms-drend
     container_name: drend-ms-drend
-    hostname: drend
+    hostname: drend-ms-drend
     volumes:
       - "../drend:/service/drend:ro"
       - "../users:/service/users:ro"

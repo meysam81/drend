@@ -4,7 +4,7 @@ services:
   grafana:
     image: grafana/grafana:6.2.0
     container_name: drend-ms-analytic-grafana
-    hostname: drend
+    hostname: drend-ms-analytic-grafana
     volumes:
       - "./config/grafana/grafana.ini:/etc/grafana/grafana.ini:ro"
     ports:
@@ -19,7 +19,7 @@ services:
   prometheus:
     image: prom/prometheus:v2.10.0
     container_name: drend-ms-analytic-prometheus
-    hostname: drend
+    hostname: drend-ms-analytic-prometheus
     volumes:
       - "./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro"
     ports:

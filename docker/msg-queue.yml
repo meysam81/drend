@@ -4,7 +4,7 @@ services:
   zookeeper:
     image: zookeeper:3.5.4-beta
     container_name: drend-ms-msg-queue-zookeeper
-    hostname: drend
+    hostname: drend-ms-msg-queue-zookeeper
     ports:
       - "127.0.0.1:2181:2181"
     restart: unless-stopped
@@ -16,7 +16,7 @@ services:
   kafka:
     image: bitnami/kafka:2.2.0-ol-7-r49
     container_name: drend-ms-msg-queue-kafka
-    hostname: drend
+    hostname: drend-ms-msg-queue-kafka
     volumes:
       - "./persistency/drend-ms-msg-queue-kafka/data:/bitnami/kafka:rw"
     ports:
