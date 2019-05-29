@@ -42,3 +42,17 @@ services:
 #                                 DOCKERFILE
 # ==============================================================================
       PORT: 8000
+
+  redis:
+    image: redis:alpine3.9
+    container_name: drend-ms-redis
+    hostname: drend-ms-redis
+    volumes:
+      - "./persistency/drend-ms-redis/data:/data:rw"
+    ports:
+      - "127.0.0.1:6380:6379"
+    restart: unless-stopped
+    command: [
+        'redis-server', '--requirepass',
+        'rtVFk59VQJ4vEy3zNHjLjKM6DQBWENrC6hs2h2AVX6F5HVGH3sPnnNbTALRT',
+    ]
