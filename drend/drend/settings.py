@@ -25,7 +25,9 @@ SECRET_KEY = '0n7^w495_3n+n9-*08&kkgi_8+^e-6f=j5@!r-hbsryj%gzic('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'drend-ms-drend',
+]
 
 
 # Application definition
@@ -107,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'ASIA/TEHRAN'
 
 USE_I18N = True
 
