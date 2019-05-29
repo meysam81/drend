@@ -4,7 +4,7 @@ services:
   kong:
     image: kong:1.2.0rc1-alpine
     container_name: drend-ms-gateway-kong
-    hostname: drend
+    hostname: drend-ms-gateway-kong
     ports:
       - "127.0.0.1:80:8000"
       - "127.0.0.1:443:8443"
@@ -38,7 +38,7 @@ services:
   postgres:
     image: postgres:11.3-alpine
     container_name: drend-ms-gateway-postgres
-    hostname: drend
+    hostname: drend-ms-gateway-postgres
     volumes:
       - "./persistency/drend-ms-gateway-postgres/data:/var/lib/postgres/data:rw"
     ports:
@@ -67,7 +67,7 @@ services:
   konga:
     image: pantsel/konga:0.14.1
     container_name: drend-ms-gateway-konga
-    hostname: drend
+    hostname: drend-ms-gateway-konga
     ports:
       - "127.0.0.1:1337:1337"
     restart: unless-stopped
