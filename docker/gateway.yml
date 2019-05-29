@@ -36,7 +36,7 @@ services:
       - kong-migrate
 
   postgres:
-    image: postgres:9.6.13-alpine
+    image: postgres:11.3-alpine
     container_name: drend-ms-gateway-postgres
     hostname: drend
     volumes:
@@ -49,11 +49,11 @@ services:
       POSTGRES_PASSWORD: changeMeLater
       POSTGRES_DB: kong
 
-  kong-migrate-bootstrap:
+  kong-migrate:
     image: kong:1.2.0rc1-alpine
-    container_name: drend-ms-gateway-kong-migrate-bootstrap
-    hostname: drend
-#    restart: unless-stopped
+    container_name: drend-ms-gateway-kong-migrate
+    hostname: drend-ms-gateway-kong-migrate
+    restart: on-failure
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: postgres
@@ -63,21 +63,6 @@ services:
     command: kong migrations bootstrap
     depends_on:
       - postgres
-
-  kong-migrate:
-    image: kong:1.2.0rc1-alpine
-    container_name: drend-ms-gateway-kong-migrate
-    hostname: drend
-#    restart: unless-stopped
-    environment:
-      KONG_DATABASE: postgres
-      KONG_PG_HOST: postgres
-      KONG_PG_USER: kong
-      KONG_PG_PASSWORD: changeMeLater
-      KONG_PG_DATABASE: kong
-    command: kong migrations up
-    depends_on:
-      - kong-migrate-bootstrap
 
   konga:
     image: pantsel/konga:0.14.1
