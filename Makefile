@@ -5,12 +5,14 @@ build-dev:
 run-dev:
 	docker-compose -f docker/drend-dev.yml \
 					-f docker/gateway.yml \
+					-f docker/api.yml \
 					-f docker/analytic.yml \
 					up
 
 stop-dev:
 	docker-compose -f docker/drend-dev.yml \
 					-f docker/gateway.yml \
+					-f docker/api.yml \
 					-f docker/analytic.yml \
 					down
 
