@@ -78,10 +78,21 @@ WSGI_APPLICATION = 'drend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
+MONGO_DATABASE = os.environ['MONGO_DATABASE']
+MONGO_USERNAME = os.environ['MONGO_USERNAME']
+MONGO_PASSWORD = os.environ['MONGO_PASSWORD']
+MONGO_HOST = os.environ['MONGO_HOST']
+MONGO_PORT = int(os.environ['MONGO_PORT'])
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join('/service/database', 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': MONGO_DATABASE,
+        'USER': MONGO_USERNAME,
+        'PASSWORD': MONGO_PASSWORD,
+        'HOST': MONGO_HOST,
+        'PORT': MONGO_PORT,
     }
 }
 
