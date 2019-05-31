@@ -12,6 +12,8 @@ setup(
         'djangorestframework==3.9.4',
         'Markdown==3.1.1',
         'django-filter==2.1.0',
+        'djongo==1.2.32',
+        'sqlparse==0.2.4',
     ],
     license='MIT',
     keywords=[
