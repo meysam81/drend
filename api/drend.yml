@@ -128,7 +128,7 @@ paths:
         schema:
           $ref: "#/definitions/Login"
       responses:
-        202:
+        200:
           description: "Logged in successfully"
           schema:
             $ref: "#/definitions/Token"
@@ -168,7 +168,6 @@ definitions:
     $ref: "#/components/schemas/response"
   Token:
     allOf:
-      - $ref: "#/components/schemas/response"
       - $ref: "#/components/schemas/token"
 components:
   schemas:
