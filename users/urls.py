@@ -13,5 +13,5 @@ router.register('', UserViewset)
 app_name = 'users'
 
 urlpatterns = [
-    path('', include(router.urls), name='users-root')
+    path('', include(router.urls), name='users-root'),
 ]
