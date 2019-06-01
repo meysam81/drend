@@ -5,14 +5,13 @@ services:
     build:
       context: ../drend
       target: dev
-    image: drend-ms-drend
-    container_name: drend-ms-drend
-    hostname: drend
+    image: drend_ms_drend
+    container_name: drend_ms_drend
+    hostname: drend_ms_drend
     volumes:
       - "../drend:/service/drend:ro"
       - "../users:/service/users:ro"
-      - "./persistency/drend-ms-drend/static:/service/static:rw"
-      - "./persistency/drend-ms-drend/database/:/service/database:rw"
+      - "./persistency/drend_ms_drend/static:/service/static:rw"
     ports:
       - "127.0.0.1:8080:8000"
     restart: unless-stopped
@@ -39,6 +38,43 @@ services:
       LANG: en_US.UTF-8
 
 # ==============================================================================
+#                                  DATABASE
+# ==============================================================================
+      MONGO_DATABASE: "drend"
+      MONGO_USERNAME: "admin"
+      MONGO_PASSWORD: "EZJuxkYpCvaGTenje78rPNsxnZsK8bLtPKqEnUJejuzYrfDCQbzbLaRy57dU"
+      MONGO_HOST: "drend_ms_mongo"
+      MONGO_PORT: 27017
+
+# ==============================================================================
 #                                 DOCKERFILE
 # ==============================================================================
       PORT: 8000
+
+  redis:
+    image: redis:alpine3.9
+    container_name: drend_ms_redis
+    hostname: drend_ms_redis
+    volumes:
+      - "./persistency/drend_ms_redis/data:/data:rw"
+    ports:
+      - "127.0.0.1:6380:6379"
+    restart: unless-stopped
+    command: [
+        'redis-server', '--requirepass',
+        'rtVFk59VQJ4vEy3zNHjLjKM6DQBWENrC6hs2h2AVX6F5HVGH3sPnnNbTALRT',
+    ]
+
+  mongo:
+    image: mongo:4.1.11
+    container_name: drend_ms_mongo
+    hostname: drend_ms_mongo
+    volumes:
+      - "./persistency/drend_ms_mongo/data:/data/db:rw"
+    ports:
+      - "127.0.0.1:27019:27017"
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: "drend"
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "EZJuxkYpCvaGTenje78rPNsxnZsK8bLtPKqEnUJejuzYrfDCQbzbLaRy57dU"
