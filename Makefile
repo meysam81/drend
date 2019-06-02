@@ -37,11 +37,11 @@ migrate:
 	docker exec drend-ms-drend python manage.py migrate
 
 not-up:
-	docker ps -a | grep -v Up | grep drend_ms
+	docker ps -a | grep -v Up | grep drend-ms
 
 ps:
-	docker ps | grep drend_ms
+	docker ps | grep drend-ms
 
 purge-containers:
-	docker ps -a | grep drend_ms | awk 'NR>1 {print $1}' | xargs docker stop | xargs docker rm
+	docker ps -a | grep drend-ms | awk 'NR>1 {print $1}' | xargs docker stop | xargs docker rm
 
