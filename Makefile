@@ -17,24 +17,24 @@ stop-dev:
 					down
 
 base:
-	docker build -t drend_ms_base docker/base
+	docker build -t drend-ms-base docker/base
 
 test:
 
 collect-static:
-	docker exec -it drend_ms_drend python manage.py collectstatic
+	docker exec -it drend-ms-drend python manage.py collectstatic
 
 create-super-user:
-	docker exec -it drend_ms_drend python manage.py createsuperuser
+	docker exec -it drend-ms-drend python manage.py createsuperuser
 
 shell:
-	docker exec -it drend_ms_drend python manage.py shell
+	docker exec -it drend-ms-drend python manage.py shell
 
 make-migrations:
-	docker exec drend_ms_drend python manage.py makemigrations
+	docker exec drend-ms-drend python manage.py makemigrations
 
 migrate:
-	docker exec drend_ms_drend python manage.py migrate
+	docker exec drend-ms-drend python manage.py migrate
 
 not-up:
 	docker ps -a | grep -v Up | grep drend_ms
