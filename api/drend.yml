@@ -1,0 +1,200 @@
+swagger: "2.0"
+info:
+  description: "**Drend** API"
+  version: "1.0.0"
+  title: "Drend"
+  contact:
+    name: "Meysam Azad"
+    email: "meysamazad81@yahoo.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "http://localhost"
+basePath: "/v1"
+tags:
+- name: "User Management"
+  description: "Everything related to users"
+- name: "Login"
+  description: "Endpoints for logging in & out"
+schemes:
+- "https"
+- "http"
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users:
+    post:
+      tags:
+      - "User Management"
+      summary: "Add a new user"
+      description: "Register a user to the system"
+      operationId: "register_user"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        201:
+          $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Invalid body"
+        409:
+          description: "User already exists"
+  /users/{username}:
+    put:
+      tags:
+      - "User Management"
+      summary: "Update an existing user"
+      description: "Update a user"
+      operationId: "update_user"
+      parameters:
+      - in: "path"
+        name: "username"
+        type: "string"
+        required: true
+        description: "Unique usename of a user"
+      - in: "body"
+        name: "body"
+        description: "User object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "Updated succesfully"
+        400:
+          description: "Invalid body"
+        404:
+          description: "user not found"
+      security:
+      - jwt: []
+    get:
+      tags:
+      - "User Management"
+      summary: "Get a user info from a given username"
+      description: "The complete user info queried by the username"
+      operationId: "get_user"
+      parameters:
+      - in: "path"
+        name: "username"
+        type: "string"
+        required: true
+        description: "Unique usename of a user"
+      responses:
+        200:
+          description: "User found successfully"
+          schema:
+            $ref: "#/definitions/User"
+        401:
+          description: "Not allowed to get other user's info"
+      security:
+      - jwt: []
+    delete:
+      tags:
+      - "User Management"
+      summary: "Delete a user"
+      description: "Delete a user"
+      operationId: "delete_user"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "username to delete"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Successfully deleted"
+        404:
+          description: "Not allowed to delete other users"
+      security:
+      - jwt: []
+  /login:
+    post:
+      tags:
+      - "Login"
+      summary: "Logs user into the system"
+      description: "Logs user into the system"
+      operationId: "login"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "The user object for login"
+        required: true
+        schema:
+          $ref: "#/definitions/Login"
+      responses:
+        200:
+          description: "Logged in successfully"
+          schema:
+            $ref: "#/definitions/Token"
+        400:
+          description: "Invalid username/password supplied"
+securityDefinitions:
+  jwt:
+    type: "apiKey"
+    name: "Bearer"
+    in: "header"
+definitions:
+  Login:
+    $ref: "#/components/schemas/login"
+  User:
+    allOf:
+      - $ref: "#/components/schemas/login"
+      - type: "object"
+        properties:
+          firstname:
+            type: "string"
+            example: "john"
+          lastname:
+            type: "string"
+            example: "doe"
+          email:
+            type: "string"
+            example: "john@doe.com"
+          phone:
+            type: "string"
+            example: "989123456789"
+        required:
+          - firstname
+          - lastname
+          - email
+          - phone
+  ApiResponse:
+    $ref: "#/components/schemas/response"
+  Token:
+    allOf:
+      - $ref: "#/components/schemas/token"
+components:
+  schemas:
+    login:
+      type: "object"
+      properties:
+        username:
+          type: "string"
+          example: "john-doe"
+        password:
+          type: "string"
+          example: "john1234"
+      required:
+        - username
+        - password
+    response:
+      type: "object"
+      properties:
+        status:
+          type: "integer"
+          example: 200
+        message:
+          type: "string"
+          example: "OK"
+    token:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"

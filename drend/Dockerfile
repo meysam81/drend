@@ -19,11 +19,9 @@ RUN pip install --no-index -f ./wheelhouse .
 
 ENV ENV development
 
-RUN chmod u+x ./entrypoint.sh
+EXPOSE ${PORT}
 
-EXPOSE 6000
-
-CMD './entrypoint.sh'
+CMD sh entrypoint.sh
 
 
 
@@ -38,8 +36,6 @@ RUN pip install --no-index -f ./wheelhouse .
 
 ENV ENV production
 
-RUN chmod u+x ./entrypoint.sh
+EXPOSE ${PORT}
 
-EXPOSE 6000
-
-CMD './entrypoint.sh'
+CMD sh entrypoint.sh

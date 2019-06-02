@@ -1,0 +1,88 @@
+version: "3.7"
+
+services:
+  kong:
+    image: kong:1.2.0rc1-alpine
+    container_name: drend-ms-gateway-kong
+    hostname: drend-ms-gateway-kong
+    ports:
+      - "127.0.0.1:80:8000"
+      - "127.0.0.1:443:8443"
+      - "127.0.0.1:8001:8001"
+      - "127.0.0.1:8444:8444"
+    restart: unless-stopped
+    environment:
+
+# ==============================================================================
+#                                 POSTGRES
+# ==============================================================================
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: postgres
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: changeMeLater
+      KONG_PG_DATABASE: kong
+
+# ==============================================================================
+#                                 KONG
+# ==============================================================================
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+      KONG_LOG_LEVEL: error
+    depends_on:
+      - postgres
+      - kong-migrate
+
+  postgres:
+    image: postgres:11.3-alpine
+    container_name: drend-ms-gateway-postgres
+    hostname: drend-ms-gateway-postgres
+    volumes:
+      - "./persistency/drend-ms-gateway-postgres/data:/var/lib/postgresql/data:rw"
+    ports:
+      - "127.0.0.1:5432:5432"
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: changeMeLater
+      POSTGRES_DB: kong
+
+  kong-migrate:
+    image: kong:1.2.0rc1-alpine
+    container_name: drend-ms-gateway-kong-migrate
+    hostname: drend-ms-gateway-kong-migrate
+    restart: on-failure
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: postgres
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: changeMeLater
+      KONG_PG_DATABASE: kong
+    command: kong migrations bootstrap
+    depends_on:
+      - postgres
+
+  konga:
+    image: pantsel/konga:0.14.1
+    container_name: drend-ms-gateway-konga
+    hostname: drend-ms-gateway-konga
+    ports:
+      - "127.0.0.1:1337:1337"
+    restart: unless-stopped
+    environment:
+      PORT: 1337
+      NODE_ENV: development
+      DB_ADAPTER: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: kong
+      DB_PASSWORD: changeMeLater
+      DB_DATABASE: kong
+      KONGA_LOG_LEVEL: error
+      TOKEN_SECRET: changeMeLater
+    depends_on:
+      - postgres
+      - kong
+
