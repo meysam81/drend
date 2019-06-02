@@ -27,7 +27,7 @@ SECRET_KEY = '0n7^w495_3n+n9-*08&kkgi_8+^e-6f=j5@!r-hbsryj%gzic('
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'drend_ms_drend',
+    'drend-ms-drend',
     'localhost',
 ]
 

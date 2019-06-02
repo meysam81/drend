@@ -3,7 +3,7 @@ version: "3.7"
 services:
   swagger-ui:
     image: swaggerapi/swagger-ui:v3.22.2
-    container_name: drend_ms_swagger_ui
+    container_name: drend-ms-swagger-ui
     volumes:
       - "../api:/api:ro"
     ports:
