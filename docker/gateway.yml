@@ -3,8 +3,8 @@ version: "3.7"
 services:
   kong:
     image: kong:1.2.0rc1-alpine
-    container_name: drend_ms_gateway_kong
-    hostname: drend_ms_gateway_kong
+    container_name: drend-ms-gateway-kong
+    hostname: drend-ms-gateway-kong
     ports:
       - "127.0.0.1:80:8000"
       - "127.0.0.1:443:8443"
@@ -37,10 +37,10 @@ services:
 
   postgres:
     image: postgres:11.3-alpine
-    container_name: drend_ms_gateway_postgres
-    hostname: drend_ms_gateway_postgres
+    container_name: drend-ms-gateway-postgres
+    hostname: drend-ms-gateway-postgres
     volumes:
-      - "./persistency/drend_ms_gateway_postgres/data:/var/lib/postgresql/data:rw"
+      - "./persistency/drend-ms-gateway-postgres/data:/var/lib/postgresql/data:rw"
     ports:
       - "127.0.0.1:5432:5432"
     restart: unless-stopped
@@ -51,8 +51,8 @@ services:
 
   kong-migrate:
     image: kong:1.2.0rc1-alpine
-    container_name: drend_ms_gateway_kong_migrate
-    hostname: drend_ms_gateway_kong_migrate
+    container_name: drend-ms-gateway-kong-migrate
+    hostname: drend-ms-gateway-kong-migrate
     restart: on-failure
     environment:
       KONG_DATABASE: postgres
@@ -66,8 +66,8 @@ services:
 
   konga:
     image: pantsel/konga:0.14.1
-    container_name: drend_ms_gateway_konga
-    hostname: drend_ms_gateway_konga
+    container_name: drend-ms-gateway-konga
+    hostname: drend-ms-gateway-konga
     ports:
       - "127.0.0.1:1337:1337"
     restart: unless-stopped

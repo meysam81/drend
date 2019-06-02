@@ -5,13 +5,13 @@ services:
     build:
       context: ../drend
       target: dev
-    image: drend_ms_drend
-    container_name: drend_ms_drend
-    hostname: drend_ms_drend
+    image: drend-ms-drend
+    container_name: drend-ms-drend
+    hostname: drend-ms-drend
     volumes:
       - "../drend:/service/drend:ro"
       - "../users:/service/users:ro"
-      - "./persistency/drend_ms_drend/static:/service/static:rw"
+      - "./persistency/drend-ms-drend/static:/service/static:rw"
     ports:
       - "127.0.0.1:8080:8000"
     restart: unless-stopped
@@ -43,7 +43,7 @@ services:
       MONGO_DATABASE: "drend"
       MONGO_USERNAME: "admin"
       MONGO_PASSWORD: "EZJuxkYpCvaGTenje78rPNsxnZsK8bLtPKqEnUJejuzYrfDCQbzbLaRy57dU"
-      MONGO_HOST: "drend_ms_mongo"
+      MONGO_HOST: "drend-ms-mongo"
       MONGO_PORT: 27017
 
 # ==============================================================================
@@ -53,10 +53,10 @@ services:
 
   redis:
     image: redis:alpine3.9
-    container_name: drend_ms_redis
-    hostname: drend_ms_redis
+    container_name: drend-ms-redis
+    hostname: drend-ms-redis
     volumes:
-      - "./persistency/drend_ms_redis/data:/data:rw"
+      - "./persistency/drend-ms-redis/data:/data:rw"
     ports:
       - "127.0.0.1:6380:6379"
     restart: unless-stopped
@@ -67,10 +67,10 @@ services:
 
   mongo:
     image: mongo:4.1.11
-    container_name: drend_ms_mongo
-    hostname: drend_ms_mongo
+    container_name: drend-ms-mongo
+    hostname: drend-ms-mongo
     volumes:
-      - "./persistency/drend_ms_mongo/data:/data/db:rw"
+      - "./persistency/drend-ms-mongo/data:/data/db:rw"
     ports:
       - "127.0.0.1:27019:27017"
     restart: unless-stopped
