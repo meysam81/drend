@@ -15,6 +15,7 @@ setup(
         'djongo==1.2.32',
         'sqlparse==0.2.4',
         'djangorestframework-jwt==1.11.0',
+        'python-jose==3.0.1',
     ],
     license='MIT',
     keywords=[
