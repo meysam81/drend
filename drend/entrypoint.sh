@@ -3,6 +3,7 @@
 
 gunicorn -b ${ADDRESS} \
          --backlog ${BACKLOG} \
+		 -w ${WORKERS} \
          --threads ${THREADS} \
          --max-requests ${MAX_REQUESTS} \
          -t ${TIMEOUT} \

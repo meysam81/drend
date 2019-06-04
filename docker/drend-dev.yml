@@ -22,6 +22,7 @@ services:
 # ==============================================================================
       ADDRESS: ":8000"
       BACKLOG: 2048
+      WORKERS: 4
       THREADS: 1
       MAX_REQUESTS: 0
       TIMEOUT: 10
