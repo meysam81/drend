@@ -11,6 +11,7 @@ def jwt_payload_handler(user):
 
     now = datetime.datetime.now()
     host_addr = socket.gethostname()
+
     return {
         'uid': user.id,
         'sub': user.username,
@@ -23,8 +24,10 @@ def jwt_payload_handler(user):
 
 
 def jwt_decode_handler(token):
-    return jwt.decode(token, settings.SECRET_KEY, audience=socket.gethostname(),
-                      issuer=socket.gethostname())
+    host_addr = socket.gethostname()
+
+    return jwt.decode(token, settings.SECRET_KEY, audience=host_addr,
+                      issuer=host_addr)
 
 
 def jwt_encode_handler(payload):
