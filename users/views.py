@@ -7,3 +7,5 @@ from .serializers import UserSerializer
 class UserViewset(ModelViewSet):
     queryset = User.objects.order_by('-date_joined')
     serializer_class = UserSerializer
+    lookup_field = 'username'
+
