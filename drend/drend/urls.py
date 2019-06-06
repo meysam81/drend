@@ -22,7 +22,6 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('rest_framework.urls', namespace='rest_framework')),
     path('users/', include('users.urls', namespace='users')),
     path('login/', obtain_jwt_token, name='login'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
