@@ -13,6 +13,16 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import datetime
 
+
+from . import (
+    MONGO_DATABASE,
+    MONGO_HOST,
+    MONGO_PORT,
+    MONGO_USERNAME,
+    MONGO_PASSWORD,
+)
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -56,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'drend.drend.urls'
+ROOT_URLCONF = 'drend.urls'
 
 TEMPLATES = [
     {
@@ -80,12 +90,6 @@ WSGI_APPLICATION = 'drend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-
-MONGO_DATABASE = os.environ['MONGO_DATABASE']
-MONGO_USERNAME = os.environ['MONGO_USERNAME']
-MONGO_PASSWORD = os.environ['MONGO_PASSWORD']
-MONGO_HOST = os.environ['MONGO_HOST']
-MONGO_PORT = int(os.environ['MONGO_PORT'])
 
 DATABASES = {
     'default': {
@@ -136,10 +140,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/service/static/'
+STATIC_ROOT = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join('/', "static"),
 ]
 
 REST_FRAMEWORK = {

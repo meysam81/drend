@@ -1,3 +1,6 @@
+.PHONY: startapp
+
+REQUIRED=$(if $(value $(1)),,$(error $(1) not set))
 
 build-dev:
 	docker-compose -f docker/drend-dev.yml build
@@ -51,3 +54,9 @@ ps:
 
 purge-containers:
 	docker ps -a | grep drend-ms | awk 'NR>1 {print $1}' | xargs docker stop | xargs docker rm
+
+startapp:
+	$(call REQUIRED,APP)
+	cd drend && \
+	ENV=management \
+	python3 manage.py startapp ${APP}

@@ -9,10 +9,8 @@ services:
     container_name: drend-ms-drend
     hostname: drend-ms-drend
     volumes:
-      - "../drend:/service/drend:ro"
-      - "../users:/service/users:ro"
-      - "../homeworks:/service/homeworks:ro"
-      - "./persistency/drend-ms-drend/static:/service/static:rw"
+      - "../drend:/service:ro"
+      - "./persistency/drend-ms-drend/static:/static:rw"
     ports:
       - "127.0.0.1:8080:8000"
     restart: unless-stopped
