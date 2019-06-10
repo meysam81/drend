@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'drend.drend.urls'
+ROOT_URLCONF = 'drend.urls'
 
 TEMPLATES = [
     {
@@ -136,10 +136,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/service/static/'
+STATIC_ROOT = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join('/', "static"),
 ]
 
 REST_FRAMEWORK = {
