@@ -9,22 +9,21 @@ info:
   license:
     name: "MIT"
     url: "https://opensource.org/licenses/MIT"
-host: "http://localhost"
-basePath: "/v1"
+host: "localhost"
+basePath: "/"
 tags:
 - name: "User Management"
   description: "Everything related to users"
 - name: "Login"
   description: "Endpoints for logging in & out"
 schemes:
-- "https"
 - "http"
 consumes:
   - application/json
 produces:
   - application/json
 paths:
-  /users:
+  /users/:
     post:
       tags:
       - "User Management"
@@ -45,7 +44,7 @@ paths:
           description: "Invalid body"
         409:
           description: "User already exists"
-  /users/{username}:
+  /users/{username}/:
     put:
       tags:
       - "User Management"
@@ -113,7 +112,7 @@ paths:
           description: "Not allowed to delete other users"
       security:
       - jwt: []
-  /login:
+  /login/:
     post:
       tags:
       - "Login"
@@ -137,7 +136,7 @@ paths:
 securityDefinitions:
   jwt:
     type: "apiKey"
-    name: "Bearer"
+    name: "Authorization"
     in: "header"
 definitions:
   Login:

@@ -16,6 +16,13 @@ stop-dev:
 					-f docker/analytic.yml \
 					down
 
+logs:
+	docker-compose -f docker/drend-dev.yml \
+					-f docker/gateway.yml \
+					-f docker/api.yml \
+					-f docker/analytic.yml \
+					logs --follow
+
 base:
 	docker build -t drend-ms-base docker/base
 
@@ -44,4 +51,3 @@ ps:
 
 purge-containers:
 	docker ps -a | grep drend-ms | awk 'NR>1 {print $1}' | xargs docker stop | xargs docker rm
-
