@@ -12,7 +12,7 @@ setup(
         'djangorestframework==3.9.4',
         'Markdown==3.1.1',
         'django-filter==2.1.0',
-        'djongo==1.2.32',
+        'djongo==1.3.7',
         'sqlparse==0.2.4',
         'djangorestframework-jwt==1.11.0',
         'python-jose==3.0.1',
