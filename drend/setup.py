@@ -10,7 +10,7 @@ setup(
         "Django>=2.2.3",
         "gunicorn==19.9.0",
         'djangorestframework==3.9.4',
-        'Markdown==3.1.1',
+        'Markdown==3.8.1',
         'django-filter==2.1.0',
         'djongo==1.2.32',
         'sqlparse==0.2.4',
