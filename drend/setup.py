@@ -8,7 +8,7 @@ setup(
     author_email='MeysamAzad81@yahoo.com',
     install_requires=[
         "Django>=2.2.3",
-        "gunicorn==19.9.0",
+        "gunicorn==25.3.0",
         'djangorestframework==3.9.4',
         'Markdown==3.1.1',
         'django-filter==2.1.0',
